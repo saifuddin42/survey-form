@@ -11,14 +11,14 @@
 
     <!-- main container for the form -->
     <div class="container">
-        <form novalidate [formGroup]="surveyForm" method="POST">
+        <form novalidate [formGroup]="surveyForm" (ngSubmit)="submitSurveyForm()">
 
             <!-- first name -->
             <div class="labels">
                 <label id="fname-label" for="name">First Name</label>
             </div>
             <div class="input-tab">
-                <input class="input-field" type="text" formControlName="firstName" name="name" placeholder="Enter Your First Name">
+                <input class="input-field" type="text" formControlName="firstName" placeholder="Enter Your First Name">
             </div>
 
             <!-- last name -->
@@ -26,7 +26,7 @@
                 <label id="lname-label" for="name">Last Name</label>
             </div>
             <div class="input-tab">
-                <input class="input-field" type="text" formControlName="lastName" name="name" placeholder="Enter Your Last Name">
+                <input class="input-field" type="text" formControlName="lastName" placeholder="Enter Your Last Name">
             </div>
 
             <!-- address -->
@@ -34,8 +34,7 @@
                 <label for="address">Address</label>
             </div>
             <div class="input-tab">
-                <textarea class="input-field" id="address" name="address" placeholder="Enter Your Address" required
-                    autofocus></textarea>
+                <textarea class="input-field" id="address" formControlName="address" placeholder="Enter Your Address" required autofocus></textarea>
             </div>
 
             <!-- city -->
@@ -43,8 +42,7 @@
                 <label id="city-label" for="city">City</label>
             </div>
             <div class="input-tab">
-                <input class="input-field" type="text" id="city" name="city" placeholder="Enter Your City" required
-                    autofocus>
+                <input class="input-field" type="text" id="city" formControlName="city" placeholder="Enter Your City" required autofocus>
             </div>
 
             <!-- state -->
@@ -52,8 +50,7 @@
                 <label id="state-label" for="state">State</label>
             </div>
             <div class="input-tab">
-                <input class="input-field" type="text" id="state" name="state" placeholder="Enter Your State" required
-                    autofocus>
+                <input class="input-field" type="text" id="state" formControlName="state" placeholder="Enter Your State" required autofocus>
             </div>
 
             <!-- zip -->
@@ -61,8 +58,7 @@
                 <label id="zip-label" for="city">Zip</label>
             </div>
             <div class="input-tab">
-                <input class="input-field" type="number" id="zip" name="zip" placeholder="Enter Your Zip" required
-                    autofocus>
+                <input class="input-field" type="number" id="zip" formControlName="zip" placeholder="Enter Your Zip" required autofocus>
             </div>
 
             <!-- phone -->
@@ -70,8 +66,7 @@
                 <label id="phone-label" for="city">Phone Number</label>
             </div>
             <div class="input-tab">
-                <input class="input-field" type="number" id="phone" name="phone" placeholder="Enter Your Phone Number"
-                    required autofocus>
+                <input class="input-field" type="number" id="phone" formControlName="phone" placeholder="Enter Your Phone Number" required autofocus>
             </div>
 
             <!-- email -->
@@ -79,8 +74,7 @@
                 <label id="email-label" for="email">Email</label>
             </div>
             <div class="input-tab">
-                <input class="input-field" type="email" id="email" name="email" placeholder="username@email.com"
-                    required autofocus>
+                <input class="input-field" type="email" id="email" formControlName="email" placeholder="username@email.com" required autofocus>
             </div>
 
             <!-- date -->
@@ -88,7 +82,7 @@
                 <label id="date-label" for="date">Date Of Survey</label>
             </div>
             <div class="input-tab">
-                <input class="input-field" type="date" id="date" name="date" required autofocus>
+                <input class="input-field" type="date" id="date" formControlName="date" required autofocus>
             </div>
 
             <!-- checkbox -->
@@ -96,14 +90,14 @@
                 <br>
                 <label>What do you like most about the campus?<br>(Check all that apply)</label>
             </div>
-            <div class="input-tab">
+            <div class="input-tab" formGroupName="likes">
                 <br>
-                <input type="checkbox" name="student" value="student">Students<br>
-                <input type="checkbox" name="location" value="location">Location<br>
-                <input type="checkbox" name="campus" value="campus">Campus<br>
-                <input type="checkbox" name="atmosphere" value="atmosphere">Atmosphere<br>
-                <input type="checkbox" name="dorms" value="dorms">Dorm Rooms<br>
-                <input type="checkbox" name="sports" value="sports">Sports<br>
+                <input type="checkbox" formControlName="student">Students<br>
+                <input type="checkbox" formControlName="location">Location<br>
+                <input type="checkbox" formControlName="campus">Campus<br>
+                <input type="checkbox" formControlName="atmosphere">Atmosphere<br>
+                <input type="checkbox" formControlName="dorms">Dorm Rooms<br>
+                <input type="checkbox" formControlName="sports">Sports<br>
             </div>
 
             <!-- options -->
@@ -113,10 +107,10 @@
             </div>
             <div class="input-tab">
                 <br>
-                <input type="radio" name="radio-button" value="friends">Friends<br>
-                <input type="radio" name="radio-button" value="tv">Television<br>
-                <input type="radio" name="radio-button" value="internet">Internet<br>
-                <input type="radio" name="radio-button" value="other">Other<br>
+                <input type="radio" formControlName="interest" value="friends">Friends<br>
+                <input type="radio" formControlName="interest" value="tv">Television<br>
+                <input type="radio" formControlName="interest" value="internet">Internet<br>
+                <input type="radio" formControlName="interest" value="other">Other<br>
             </div>
 
             <!-- dropdown -->
@@ -124,7 +118,7 @@
                 <label for="dropdown">How likely are you to recommend this university to others?</label>
             </div>
             <div class="input-tab">
-                <select id="dropdown" name="recommend">
+                <select id="dropdown" formControlName="recommend">
                     <option disabled value selected>Select an option</option>
                     <option value="veryLikely">Very Likely</option>
                     <option value="likely">Likely</option>
@@ -156,6 +150,13 @@
             </div>
 
         </form>
+
+        <!-- Form Data -->
+        <section>
+            <hr>
+            <h3>Testing</h3>
+            <pre>{{ surveyForm.value | json }}</pre>
+        </section>
     </div>
 
     <!-- footer -->

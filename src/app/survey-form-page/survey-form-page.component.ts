@@ -27,6 +27,7 @@ export class SurveyFormPageComponent implements OnInit {
       zip: this.fb.control(null, Validators.required),
       phone: this.fb.control(null, Validators.required),
       email: this.fb.control(null, Validators.required),
+      date: this.fb.control(null, Validators.required),
       likes: this.fb.group({
         student: this.fb.control(null),
         location: this.fb.control(null),
@@ -35,9 +36,12 @@ export class SurveyFormPageComponent implements OnInit {
         dorms: this.fb.control(null),
         sports: this.fb.control(null)
       }),
-      interests: this.fb.control(null),
+      interest: this.fb.control(null),
       recommend: this.fb.control('Select an option')
     });
   }
 
+  submitSurveyForm() {
+    console.log(this.surveyForm.value);
+  }
 }
